@@ -1,5 +1,9 @@
 # 💜 CTF Control Room
 
+<p align="center">
+  <img src="docs/images/welcome%20page.png" alt="CTF Control Room Welcome Screen" width="100%">
+</p>
+
 **A local workspace where humans and AI work together during authorized CTF challenges.**
 
 ### What is a CTF?
