@@ -1,54 +1,47 @@
 # 💜 CTF Control Room
 
-**A local, terminal-first workspace for human + AI collaboration during authorized CTF competitions.**
+**A local workspace where humans and AI work together during authorized CTF challenges.**
 
-CTF Control Room sits between **you**, your **CTF challenge**, your **terminal tools**, and an optional **AI agent**. It performs a fast local pre-scan, prepares compact context, lets the AI work in the same terminal environment, and lets you take control whenever you want.
+### What is a CTF?
 
-> **AI is optional.** Control Room does **not** install Gemini, Claude Code, Codex, Ollama, or other AI agents for you. If you want AI assistance, install your preferred supported terminal agent separately.
- 
- # Purpose
+**CTF (Capture The Flag)** is a cybersecurity competition where players solve technical challenges to find hidden **flags**.
 
-**CTF Control Room helps humans and AI solve CTF challenges together in one organized workspace.**
+Common categories include:
 
-It scans the challenge first, creates useful context, then lets you choose an AI agent such as **Gemini, Claude, or Codex**.
-
-> **Main idea:** Better context, shared tools, human control.
+`Web` • `Crypto` • `Forensics` • `Pwn` • `Reverse` • `Network` • `OSINT` • `Mobile` • `Malware`
 
 ---
 
+# Purpose
+
+**CTF Control Room organizes the challenge, AI agents, and CTF tools in one place.**
+
+It first scans the challenge locally, creates useful `context.md`, then lets you work with **Gemini, Claude Code, or Codex** in the same terminal.
+
+> **Scan first → better context → AI + human → shared tools → stay in control**
+
+---
 # Advantages
 
-## Less AI usage
-**Smart Pre-Scan** checks the challenge locally before using AI.
+| ⚡ Smart Pre-Scan | 🧠 Better AI Context |
+|---|---|
+| Checks challenge files **before using AI**. | Creates a small `context.md` with useful information. |
 
-## Better context
-Control Room creates a small `context.md` with useful information.
+| 👩‍💻 Human in Control | 🤖 Multiple AI Agents |
+|---|---|
+| **Start, interrupt, take over, or return control to AI** anytime. | Use **Gemini, Claude Code, Codex CLI**, or another supported agent. |
 
-## Human stays in control
-You can **start, interrupt, take over, or return control to the AI**.
+| 🧰 CTF Toolbox | 🔎 Smart Tool Selection |
+|---|---|
+| Installs optional tool packs and discovers tools already on your machine. | Recommends tools that match the current challenge. |
 
-## Multiple AI agents
-Use **Gemini, Claude Code, Codex CLI**, or another supported agent.
+| 💾 Organized Workflow | 🚀 Max Mode |
+|---|---|
+| Saves **sessions, snapshots, commands, notes, findings, and write-ups**. | Adds **Smart Router, Tool Planner, Hypothesis Board, Stuck Recovery, and Parallel Plan**. |
 
-## Shared CTF tools
-The human and AI can use the same tools such as `gdb`, `tshark`, `binwalk`, and `pwntools`.
-
-## Organized workflow
-Save **sessions, snapshots, notes, findings, and command history**.
-
-## Max Mode
-Adds **Smart Router, Tool Planner, Hypothesis Board, Stuck Recovery, and Parallel Plan**.
-
-## Local-first
-Most challenge data and results stay on your own machine.
-
----
-
-# In Simple Words
-
-> **Scan → prepare context → choose AI → work together → stay in control → save progress**
----
-
+| 🏠 Local-First | 🛠️ Shared Tools |
+|---|---|
+| Most challenge data and results stay on your machine. | Human and AI can use the same tools such as `gdb`, `tshark`, `binwalk`, `hashcat`, `pwntools`, and more. |
 ## 🚀 Start setup Here
 
 Choose the setup that matches how you want to use Control Room:
@@ -199,6 +192,11 @@ Snapshot / Write-up / Lessons
 <p align="center">
   <img src="docs/images/beginner.png" alt="CTF Control Room Beginner Mode workflow" width="100%">
 </p>
+### 🟣 Beginner Mode
+
+Complete guide covering setup, Smart Pre-Scan, AI agents, shared terminal, CTF tools, controls, examples, and troubleshooting.
+
+[⬇️ Download Beginner Mode Complete Guide](docs/guides/CTF_Control_Room_Beginner_Mode_Complete_Guide.docx?raw=1)
 
 **In simple words:** scan first, give the AI less but better context, let the AI use the same tools as you, and keep the human in control.
 
@@ -653,6 +651,12 @@ Parallel agents can reduce wall-clock time but may multiply model/token usage, s
 **CAI Advanced Backend**
 
 CAI integration is optional. Control Room detects it if the user installs it separately. It is never installed automatically because it is an advanced external agent framework and may generate additional model usage.
+
+### 🟣 Max Mode
+
+Complete guide covering Smart Router, Tool Planner, Hypothesis Board, Stuck Recovery, Parallel Plan, CAI, MCP, advanced tooling, and more.
+
+[⬇️ Download Max Mode Complete Guide](docs/guides/CTF_Control_Room_Max_Mode_Complete_Guide.docx?raw=1)
 
 ### Simple power profiles
 
