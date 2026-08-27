@@ -1,14 +1,278 @@
 # 💜 CTF Control Room
 
-**A terminal-first workspace for human + AI collaboration during authorized CTF competitions.**
+**A local, terminal-first workspace for human + AI collaboration during authorized CTF competitions.**
 
-**Two setup paths:** Beginner (`./setup.sh`) or Advanced (manual configuration).
+CTF Control Room sits between **you**, your **CTF challenge**, your **terminal tools**, and an optional **AI agent**. It performs a fast local pre-scan, prepares compact context, lets the AI work in the same terminal environment, and lets you take control whenever you want.
 
-CTF Control Room organizes challenges, performs a fast **no-AI pre-scan**, prepares compact context for your AI agent, exposes the CTF tools actually available on your machine, and lets you take over the same terminal whenever needed.
+> **AI is optional.** Control Room does **not** install Gemini, Claude Code, Codex, Ollama, or other AI agents for you. If you want AI assistance, install your preferred supported terminal agent separately.
+ 
+ # Purpose
 
-> AI is optional. Control Room does **not** install Claude Code, Codex, Gemini, Ollama, or any other AI agent.
+**CTF Control Room helps humans and AI solve CTF challenges together in one organized workspace.**
 
-## How it works
+It scans the challenge first, creates useful context, then lets you choose an AI agent such as **Gemini, Claude, or Codex**.
+
+> **Main idea:** Better context, shared tools, human control.
+
+---
+
+# Advantages
+
+## Less AI usage
+**Smart Pre-Scan** checks the challenge locally before using AI.
+
+## Better context
+Control Room creates a small `context.md` with useful information.
+
+## Human stays in control
+You can **start, interrupt, take over, or return control to the AI**.
+
+## Multiple AI agents
+Use **Gemini, Claude Code, Codex CLI**, or another supported agent.
+
+## Shared CTF tools
+The human and AI can use the same tools such as `gdb`, `tshark`, `binwalk`, and `pwntools`.
+
+## Organized workflow
+Save **sessions, snapshots, notes, findings, and command history**.
+
+## Max Mode
+Adds **Smart Router, Tool Planner, Hypothesis Board, Stuck Recovery, and Parallel Plan**.
+
+## Local-first
+Most challenge data and results stay on your own machine.
+
+---
+
+# In Simple Words
+
+> **Scan → prepare context → choose AI → work together → stay in control → save progress**
+---
+
+## 🚀 Start setup Here
+
+Choose the setup that matches how you want to use Control Room:
+
+| Mode | Best for | Setup |
+|---|---|---|
+| **Beginner / Standard** | New users who want the normal CTF Control Room workflow | `./setup.sh` |
+| **Max Mode** | Users who want Router, Tool Planner, Hypothesis Board, Stuck Recovery, Parallel Plan, and advanced switches | `./setup-max.sh` |
+| **Manual / Custom** | Users who want to configure individual packages and features themselves | See [`ADVANCED.md`](ADVANCED.md) |
+
+
+## 📦 Installation & Setup
+
+These are the exact commands a new GitHub user can follow.
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/Nourah-Alotaibi/ctf-control-room.git
+cd ctf-control-room
+```
+
+### 2. Beginner / Standard setup
+
+Recommended for new users:
+
+```bash
+chmod +x setup.sh
+./setup.sh
+```
+
+This creates the private Python environment, installs CTF Control Room, prepares the `~/CTF` workspace, offers optional toolbox installation, and runs the setup doctor.
+
+Launch:
+
+```bash
+./.venv/bin/ctf-go ~/CTF
+```
+
+### 3. Max setup
+
+For the advanced/max configuration:
+
+```bash
+chmod +x setup-max.sh
+./setup-max.sh
+```
+
+This applies the Max power profile and installs additional optional CTF tooling where available.
+
+You can also apply the Max profile manually:
+
+```bash
+./.venv/bin/ctf-power profile max
+```
+
+Expected Max switches:
+
+```text
+smart_router       ON
+tool_planner       ON
+hypothesis_board   ON
+stuck_recovery     ON
+parallel_agents    ON
+cai_backend        ON
+```
+
+> `cai_backend ON` only enables the integration switch. CAI itself must be installed separately if you want to use it.
+
+Launch Max Mode with the same command:
+
+```bash
+./.venv/bin/ctf-go ~/CTF
+```
+
+### 4. Check your AI agent
+
+AI agents are **not installed automatically**.
+
+Control Room currently looks for supported runnable terminal agents such as Gemini, Claude Code, and Codex.
+
+Check them manually:
+
+```bash
+gemini --version
+claude --version
+codex --version
+```
+
+You only need one supported runnable agent.
+
+To check what Control Room itself detects:
+
+```bash
+./.venv/bin/python -c "from ctf_control.core.agents import available_agents; print(available_agents())"
+```
+
+Example:
+
+```text
+['gemini']
+```
+
+If no runnable agent is installed, Control Room still works without AI for local challenge management, Smart Pre-Scan, tools, snapshots, notes, and other local features.
+
+### 5. Run the health check
+
+Before a competition:
+
+```bash
+./.venv/bin/ctf-doctor
+```
+
+This checks the environment and runs a harmless local self-test.
+
+### 6. Normal launch after installation
+
+Whenever you want to open CTF Control Room later:
+
+```bash
+cd ~/ctf-control-room
+./.venv/bin/ctf-go ~/CTF
+```
+
+
+### Beginner Mode — How It Works
+
+Beginner Mode focuses on the **core workflow only**:
+
+```text
+Challenge
+   ↓
+Smart Pre-Scan (No AI)
+   ↓
+Compact context.md
+   ↓
+Choose Gemini / Claude / Codex
+   ↓
+AI + Human share the terminal
+   ↓
+Use installed CTF tools
+   ↓
+Findings / Flag
+   ↓
+Snapshot / Write-up / Lessons
+```
+
+<p align="center">
+  <img src="docs/images/beginner.png" alt="CTF Control Room Beginner Mode workflow" width="100%">
+</p>
+
+**In simple words:** scan first, give the AI less but better context, let the AI use the same tools as you, and keep the human in control.
+
+### Max Mode — How It Works
+
+Max Mode includes the same core workflow, then adds the advanced orchestration layer:
+
+```text
+Challenge
+   ↓
+Smart Pre-Scan
+   ↓
+Compact Context
+   ↓
+Smart Router
+   ↓
+Tool Planner
+   ↓
+Hypothesis Board
+   ↓
+AI Agent ↔ Human
+   ↓
+Shared Terminal
+   ↓
+CTF Tools
+   ↓
+Evidence / Results
+   ↓
+Continue ── or ── Stuck Recovery / Parallel Plan
+```
+
+<p align="center">
+  <img src="docs/images/max.png" alt="CTF Control Room Max Mode workflow" width="100%">
+</p>
+
+> **Max Mode is not “fully autonomous mode.”** Human takeover remains available. Some Max features can also increase AI/token usage.
+
+---
+
+## 🖥️ Interface Tour
+
+The application has three main screens. The screenshots below show what a new user will see.
+
+**Image files used by this README:**
+
+```text
+docs/images/beginner.png
+docs/images/max.png
+docs/images/welcome page.png
+docs/images/ctf room.webp
+docs/images/help room.webp
+```
+
+### 1. Welcome Screen
+
+This is the first screen new users see. It introduces CTF Control Room, explains CTF briefly, and gives access to the dashboard and Help page.
+
+![CTF Control Room Welcome Screen](docs/images/welcome%20page.png)
+
+### 2. Control Room Dashboard
+
+This is the main working screen. It contains challenge selection, AI-agent selection, Smart Pre-Scan status, the shared terminal, activity information, and keyboard controls.
+
+![CTF Control Room Dashboard](docs/images/ctf%20room.webp)
+
+### 3. Help & Guide
+
+This page explains the controls and advanced features without forcing a new user to read the entire README first.
+
+![CTF Control Room Help and Guide](docs/images/help%20room.webp)
+
+---
+
+## How It Works
 
 ```text
 Challenge
@@ -270,21 +534,21 @@ The self-test does not contact an AI or remote target.
 
 ## Quick Start
 
-### Beginner — recommended
+### Beginner / Standard — recommended for new users
 
-You only need one setup command:
+Run:
 
 ```bash
 ./setup.sh
 ```
 
-The setup script automatically:
+The setup script:
 
 - checks Python,
 - creates the private `.venv`,
 - installs Control Room,
 - creates `~/CTF/` category folders,
-- asks which optional toolbox setup you want,
+- lets you choose optional toolbox packages,
 - runs `ctf-doctor`.
 
 Then launch:
@@ -293,9 +557,32 @@ Then launch:
 ./.venv/bin/ctf-go ~/CTF
 ```
 
-For more details, see [`BEGINNER.md`](BEGINNER.md).
+For a beginner walkthrough, see [`BEGINNER.md`](BEGINNER.md).
 
-### Advanced
+### Max Mode
+
+If you want the advanced/max configuration:
+
+```bash
+./setup-max.sh
+```
+
+This installs the remaining optional packs where available, applies the Max power profile, and runs the final health check.
+
+Max Mode enables advanced switches such as:
+
+```text
+Smart Router
+Tool Planner
+Hypothesis Board
+Stuck Recovery
+Parallel Agents / Parallel Plan
+CAI backend switch
+```
+
+> External AI agents and CAI are still **not installed automatically**.
+
+### Manual / Custom Setup
 
 If you prefer to configure everything yourself:
 
@@ -313,13 +600,11 @@ Optional MCP and custom configuration are documented in [`ADVANCED.md`](ADVANCED
 
 **The same installed toolbox is available to Control Room and to the AI agent.**
 
-Control Room discovers tools from the WSL/Linux `PATH` and from `~/CTF/tools/`.
-A terminal AI working in that environment can use those same installed tools.
-With MCP, compatible agents can also access them through Control Room's structured tool interface.
+Control Room discovers tools from the WSL/Linux `PATH` and from `~/CTF/tools/`. A terminal AI working in that environment can use those same installed tools. With MCP, compatible agents can also access them through Control Room's structured tool interface.
 
 AI agents themselves are never installed automatically.
 
-
+---
 
 ## AI Power Features
 
@@ -395,17 +680,17 @@ You can always turn expensive features off again.
 
 ## TUI Navigation
 
-The current build uses one consistent terminal design across all pages:
+The current build uses one consistent terminal design:
 
 - dark charcoal/black background,
 - purple borders and action accents,
 - white primary text,
-- cyan/yellow/green/red status/category accents,
+- category/status accent colors,
 - monospaced terminal layout.
 
-### Welcome page
+### Welcome Screen
 
-Launch opens a dedicated Welcome page with a simple robot and heart welcome icon, a brief explanation of CTF, and three actions:
+Launch opens the Welcome screen first.
 
 ```text
 Enter → Open Control Room
@@ -413,16 +698,19 @@ Enter → Open Control Room
 Q     → Quit
 ```
 
-Press `W` from the dashboard or Help page to return to Welcome at any time.
+Press `W` from the dashboard or Help page to return to Welcome.
 
-### Main dashboard
+> See the **Welcome Screen** screenshot in the Interface Tour above.
 
-The main page keeps the challenge list, current challenge details, agent selection,
-Smart Pre-Scan, AI controls, shared terminal, activity log, and shortcuts in one view.
+### Control Room Dashboard
+
+The dashboard is the main workspace. It keeps the challenge list, current challenge, AI-agent selector, Smart Pre-Scan status, shared terminal, activity information, and shortcuts in one place.
+
+> See the **Control Room Dashboard** screenshot in the Interface Tour above.
 
 ### Help & Guide
 
-Press `?` from the dashboard to open a full Help page.
+Press `?` from the dashboard to open the full Help page.
 
 It explains:
 
@@ -434,12 +722,14 @@ It explains:
 - Stuck Recovery,
 - Parallel Plan,
 - Tool Discovery and Tool Planner,
-- Toolbox and local reference repos,
+- toolbox and local reference repositories,
 - MCP,
 - AI power profiles,
 - system shortcuts.
 
 Press `ESC` to return, or `W` to go to Welcome.
+
+> See the **Help & Guide** screenshot in the Interface Tour above.
 
 ## Controls
 
@@ -594,7 +884,7 @@ AI power:
 The high-token AI features remain optional even after installation.
 
 
-## v0.9.3 install checks
+## Install Checks
 
 The toolbox now distinguishes **package names** from the commands they provide
 (for example `binutils → readelf`, `dnsutils → dig`, and `p7zip-full → 7z`),
@@ -612,7 +902,7 @@ the remaining optional packs, and runs the final checks.
 An internet connection is required during first setup for Python packages and
 GitHub repository clones.
 
-## v0.9.3 UI compatibility fix
+## UI Compatibility
 
 The agent selector now opens correctly even when no AI agent is installed.
 This fixes `EmptySelectError` with newer Textual releases.
