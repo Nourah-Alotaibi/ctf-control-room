@@ -1,0 +1,36 @@
+{
+  "default": {
+    "smart_router": true,
+    "tool_planner": true,
+    "hypothesis_board": true,
+    "stuck_recovery": false,
+    "parallel_agents": false,
+    "cai_backend": false
+  },
+  "profiles": {
+    "standard": {
+      "smart_router": true,
+      "tool_planner": true,
+      "hypothesis_board": true,
+      "stuck_recovery": false,
+      "parallel_agents": false,
+      "cai_backend": false
+    },
+    "advanced": {
+      "smart_router": true,
+      "tool_planner": true,
+      "hypothesis_board": true,
+      "stuck_recovery": true,
+      "parallel_agents": false,
+      "cai_backend": false
+    },
+    "max": {
+      "smart_router": true,
+      "tool_planner": true,
+      "hypothesis_board": true,
+      "stuck_recovery": true,
+      "parallel_agents": true,
+      "cai_backend": true
+    }
+  }
+}

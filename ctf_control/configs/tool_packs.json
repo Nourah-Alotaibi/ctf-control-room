@@ -1,0 +1,162 @@
+{
+  "core": {
+    "description": "Small recommended starter pack.",
+    "apt": [
+      "file",
+      "binutils",
+      "ripgrep",
+      "jq",
+      "curl",
+      "wget",
+      "unzip",
+      "p7zip-full",
+      "xxd",
+      "exiftool"
+    ],
+    "pip": [
+      "requests",
+      "beautifulsoup4"
+    ],
+    "git": []
+  },
+  "forensics": {
+    "description": "Digital forensics and stego basics.",
+    "apt": [
+      "binwalk",
+      "foremost",
+      "tshark",
+      "pngcheck",
+      "steghide"
+    ],
+    "pip": [
+      "stegoveritas"
+    ],
+    "git": []
+  },
+  "network": {
+    "description": "PCAP and network-analysis tools.",
+    "apt": [
+      "tshark",
+      "tcpdump",
+      "nmap"
+    ],
+    "pip": [
+      "scapy"
+    ],
+    "git": []
+  },
+  "pwn": {
+    "description": "Binary exploitation and debugging tools.",
+    "apt": [
+      "gdb",
+      "gdbserver",
+      "gcc",
+      "g++",
+      "make"
+    ],
+    "pip": [
+      "pwntools",
+      "ropgadget",
+      "ropper"
+    ],
+    "git": [
+      {
+        "name": "pwndbg",
+        "url": "https://github.com/pwndbg/pwndbg.git"
+      }
+    ]
+  },
+  "reverse": {
+    "description": "Reverse-engineering CLI tools.",
+    "apt": [
+      "gdb",
+      "radare2",
+      "binutils"
+    ],
+    "pip": [
+      "r2pipe"
+    ],
+    "git": []
+  },
+  "crypto": {
+    "description": "Crypto, RSA, hash and math helpers.",
+    "apt": [
+      "john",
+      "hashcat"
+    ],
+    "pip": [
+      "pycryptodome",
+      "sympy",
+      "z3-solver",
+      "gmpy2",
+      "xortool"
+    ],
+    "git": [
+      {
+        "name": "RsaCtfTool",
+        "url": "https://github.com/RsaCtfTool/RsaCtfTool.git"
+      }
+    ]
+  },
+  "web": {
+    "description": "Web CTF tools plus local references.",
+    "apt": [
+      "sqlmap",
+      "nikto",
+      "whatweb"
+    ],
+    "pip": [
+      "httpie"
+    ],
+    "git": [
+      {
+        "name": "PayloadsAllTheThings",
+        "url": "https://github.com/swisskyrepo/PayloadsAllTheThings.git"
+      },
+      {
+        "name": "HackTricks",
+        "url": "https://github.com/HackTricks-wiki/hacktricks.git"
+      },
+      {
+        "name": "jwt_tool",
+        "url": "https://github.com/ticarpi/jwt_tool.git"
+      }
+    ]
+  },
+  "mobile": {
+    "description": "Android/mobile helpers.",
+    "apt": [
+      "adb",
+      "apktool"
+    ],
+    "pip": [
+      "frida-tools"
+    ],
+    "git": []
+  },
+  "malware": {
+    "description": "Malware triage helpers.",
+    "apt": [
+      "yara",
+      "binutils"
+    ],
+    "pip": [
+      "pefile"
+    ],
+    "git": []
+  },
+  "osint": {
+    "description": "Light OSINT helpers.",
+    "apt": [
+      "whois",
+      "dnsutils"
+    ],
+    "pip": [],
+    "git": [
+      {
+        "name": "sherlock",
+        "url": "https://github.com/sherlock-project/sherlock.git"
+      }
+    ]
+  }
+}

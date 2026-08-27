@@ -1,0 +1,6 @@
+tools:
+  - {tool: file, level: FAST, mode: per_file, args: ["{file}"], timeout: 5}
+  - {tool: exiftool, level: FAST, mode: per_file, args: ["{file}"], timeout: 8}
+  - {tool: pngcheck, level: FAST, mode: per_file, args: ["{file}"], timeout: 8}
+  - {tool: binwalk, level: FAST, mode: per_file, args: ["{file}"], timeout: 10}
+  - {tool: zsteg, level: FAST, mode: per_file, args: ["{file}"], timeout: 10}

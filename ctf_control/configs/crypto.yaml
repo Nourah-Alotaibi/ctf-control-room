@@ -1,0 +1,4 @@
+tools:
+  - {tool: file, level: FAST, mode: per_file, args: ["{file}"], timeout: 5}
+  - {tool: strings, level: FAST, mode: per_file, args: ["-n","5","{file}"], timeout: 8}
+  - {tool: xxd, level: FAST, mode: per_file, args: ["-l","512","{file}"], timeout: 6}

@@ -1,0 +1,14 @@
+{
+  "minimal": [
+    "core"
+  ],
+  "recommended": [
+    "core",
+    "forensics",
+    "network",
+    "pwn",
+    "reverse",
+    "crypto",
+    "web"
+  ]
+}

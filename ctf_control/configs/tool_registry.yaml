@@ -1,0 +1,366 @@
+tools:
+  file:
+    categories:
+    - all
+    level: FAST
+    auto: true
+    input:
+    - any
+    description: Identify file type.
+  strings:
+    categories:
+    - all
+    level: FAST
+    auto: true
+    input:
+    - any
+    description: Extract printable strings.
+  exiftool:
+    categories:
+    - forensics
+    - stego
+    - osint
+    level: FAST
+    auto: true
+    input:
+    - image
+    - generic
+    description: Inspect metadata.
+  binwalk:
+    categories:
+    - forensics
+    - stego
+    - malware
+    - hardware-iot
+    level: FAST
+    auto: true
+    input:
+    - image
+    - archive
+    - firmware
+    - generic
+    description: Detect embedded files/signatures.
+  pngcheck:
+    categories:
+    - forensics
+    - stego
+    level: FAST
+    auto: true
+    input:
+    - image
+    description: Validate PNG chunks.
+  zsteg:
+    categories:
+    - stego
+    - forensics
+    level: FAST
+    auto: true
+    input:
+    - image
+    description: Common PNG/BMP steganography checks.
+  capinfos:
+    categories:
+    - network
+    - forensics
+    level: FAST
+    auto: true
+    input:
+    - pcap
+    description: PCAP metadata summary.
+  tshark:
+    categories:
+    - network
+    - forensics
+    level: FAST
+    auto: true
+    input:
+    - pcap
+    description: Packet/protocol summaries.
+  checksec:
+    categories:
+    - pwn
+    - reverse
+    - malware
+    level: FAST
+    auto: true
+    input:
+    - binary
+    description: Binary hardening/security flags.
+  readelf:
+    categories:
+    - pwn
+    - reverse
+    - malware
+    level: FAST
+    auto: true
+    input:
+    - binary
+    description: ELF headers/symbols.
+  nm:
+    categories:
+    - pwn
+    - reverse
+    level: FAST
+    auto: true
+    input:
+    - binary
+    description: List symbols.
+  objdump:
+    categories:
+    - pwn
+    - reverse
+    - malware
+    level: DEEP
+    auto: false
+    input:
+    - binary
+    description: Disassembly and binary metadata.
+  ldd:
+    categories:
+    - pwn
+    - reverse
+    level: FAST
+    auto: false
+    input:
+    - binary
+    description: Shared library dependencies.
+  ghidra:
+    categories:
+    - reverse
+    - malware
+    level: EXPENSIVE
+    auto: false
+    input:
+    - binary
+    description: Deep decompilation/analysis.
+  gdb:
+    categories:
+    - pwn
+    - reverse
+    level: DEEP
+    auto: false
+    input:
+    - binary
+    description: Interactive debugger.
+  pwndbg:
+    categories:
+    - pwn
+    - reverse
+    level: DEEP
+    auto: false
+    input:
+    - binary
+    description: GDB enhancement for exploit development.
+  ROPgadget:
+    categories:
+    - pwn
+    level: DEEP
+    auto: false
+    input:
+    - binary
+    description: Find ROP gadgets.
+  ropper:
+    categories:
+    - pwn
+    level: DEEP
+    auto: false
+    input:
+    - binary
+    description: ROP gadget analysis.
+  angr:
+    categories:
+    - pwn
+    - reverse
+    level: EXPENSIVE
+    auto: false
+    input:
+    - binary
+    description: Symbolic execution framework.
+  vol:
+    categories:
+    - forensics
+    - malware
+    level: DEEP
+    auto: false
+    input:
+    - memory
+    description: Volatility memory forensics.
+  yara:
+    categories:
+    - malware
+    - forensics
+    level: DEEP
+    auto: false
+    input:
+    - any
+    description: Pattern/rule matching.
+  floss:
+    categories:
+    - malware
+    - reverse
+    level: DEEP
+    auto: false
+    input:
+    - binary
+    description: Extract obfuscated strings.
+  jadx:
+    categories:
+    - mobile
+    - reverse
+    level: DEEP
+    auto: false
+    input:
+    - apk
+    description: Android decompiler.
+  apktool:
+    categories:
+    - mobile
+    - reverse
+    level: DEEP
+    auto: false
+    input:
+    - apk
+    description: Decode APK resources/smali.
+  frida:
+    categories:
+    - mobile
+    - malware
+    level: EXPENSIVE
+    auto: false
+    input:
+    - mobile
+    description: Dynamic instrumentation.
+  ffuf:
+    categories:
+    - web
+    level: DEEP
+    auto: false
+    input:
+    - url
+    description: Web content fuzzing.
+  feroxbuster:
+    categories:
+    - web
+    level: DEEP
+    auto: false
+    input:
+    - url
+    description: Web content discovery.
+  sqlmap:
+    categories:
+    - web
+    level: EXPENSIVE
+    auto: false
+    input:
+    - url
+    description: SQL injection automation.
+  jwt_tool:
+    categories:
+    - web
+    level: DEEP
+    auto: false
+    input:
+    - text
+    description: JWT inspection/testing.
+  RsaCtfTool:
+    categories:
+    - crypto
+    level: DEEP
+    auto: false
+    input:
+    - rsa
+    description: Automated RSA attack toolkit.
+  sage:
+    categories:
+    - crypto
+    level: EXPENSIVE
+    auto: false
+    input:
+    - math
+    description: Computer algebra for crypto/math.
+  xortool:
+    categories:
+    - crypto
+    level: DEEP
+    auto: false
+    input:
+    - text
+    - binary
+    description: XOR analysis.
+  hashcat:
+    categories:
+    - crypto
+    - forensics
+    level: EXPENSIVE
+    auto: false
+    input:
+    - hash
+    description: Password/hash cracking.
+  john:
+    categories:
+    - crypto
+    - forensics
+    level: EXPENSIVE
+    auto: false
+    input:
+    - hash
+    description: Password/hash cracking.
+  steghide:
+    categories:
+    - stego
+    level: DEEP
+    auto: false
+    input:
+    - image
+    - audio
+    description: Steganography extraction.
+  stegseek:
+    categories:
+    - stego
+    level: EXPENSIVE
+    auto: false
+    input:
+    - image
+    description: Steghide password recovery.
+  sherlock:
+    categories:
+    - osint
+    level: DEEP
+    auto: false
+    input:
+    - username
+    description: Username search across services.
+  nmap:
+    categories:
+    - network
+    - web
+    level: DEEP
+    auto: false
+    input:
+    - host
+    description: Network service discovery; never auto-run.
+  scapy:
+    categories:
+    - network
+    level: DEEP
+    auto: false
+    input:
+    - pcap
+    - packet
+    description: Packet scripting/analysis.
+  PayloadsAllTheThings:
+    categories:
+    - web
+    level: DEEP
+    auto: false
+    input:
+    - reference
+    description: Local payload/reference repository.
+  HackTricks:
+    categories:
+    - all
+    level: DEEP
+    auto: false
+    input:
+    - reference
+    description: Local security methodology reference.

@@ -1,0 +1,10 @@
+agents:
+  codex:
+    command: codex
+    args: []
+  claude:
+    command: claude
+    args: []
+  gemini:
+    command: gemini
+    args: []

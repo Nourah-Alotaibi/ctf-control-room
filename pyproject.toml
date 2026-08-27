@@ -1,0 +1,32 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "ctf-control-room"
+version = "1.0.2"
+description = "Terminal-first CTF workspace that pre-scans challenges with local tools, prepares compact AI context, and launches terminal AI agents."
+readme = "README.md"
+requires-python = ">=3.10"
+license = {text = "MIT"}
+authors = [{name = "Nourah Alotaibi"}]
+dependencies = [
+  "textual>=8.2,<9",
+  "typer>=0.12.0",
+  "rich>=13.7.0",
+  "PyYAML>=6.0",
+]
+
+[project.scripts]
+ctf-install-check = "ctf_control.install_check:main"
+ctf-power = "ctf_control.power_cli:main"
+ctf-doctor = "ctf_control.doctor:main"
+ctf-go = "ctf_control.cli:app"
+
+ctf-tools = "ctf_control.toolbox_cli:main"
+ctf-mcp = "ctf_control.mcp_server:main"
+[tool.hatch.build.targets.wheel]
+packages = ["ctf_control"]
+
+[project.optional-dependencies]
+mcp = ["mcp>=1.0.0"]

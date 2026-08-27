@@ -1,0 +1,6 @@
+tools:
+  - {tool: file, level: FAST, mode: per_file, args: ["{file}"], timeout: 5}
+  - {tool: checksec, level: FAST, mode: per_file, args: ["--file={file}"], timeout: 6}
+  - {tool: readelf, level: FAST, mode: per_file, args: ["-h","{file}"], timeout: 6}
+  - {tool: nm, level: FAST, mode: per_file, args: ["-C","{file}"], timeout: 6}
+  - {tool: strings, level: FAST, mode: per_file, args: ["-n","6","{file}"], timeout: 8}
