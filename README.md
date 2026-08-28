@@ -20,7 +20,7 @@ Common categories include:
 
 **CTF Control Room organizes the challenge, AI agents, and CTF tools in one place.**
 
-It first scans the challenge locally, creates useful `context.md`, then lets you work with **Gemini, Claude Code, or Codex** in the same terminal.
+It first scans the challenge locally, creates useful `context.md`, then lets you work with **Claude Code, Gemini CLI, Codex CLI, or optional CAI** in the same terminal when those agents are installed and runnable.
 
 > **Scan first → better context → AI + human → shared tools → stay in control**
 
@@ -41,19 +41,19 @@ It first scans the challenge locally, creates useful `context.md`, then lets you
 
 | 💾 Organized Workflow | 🚀 Max Mode |
 |---|---|
-| Saves **sessions, snapshots, commands, notes, findings, and write-ups**. | Adds **Smart Router, Tool Planner, Hypothesis Board, Stuck Recovery, and Parallel Plan**. |
+| Saves **sessions, snapshots, commands, notes, findings, and write-ups**. | Adds **Smart Router, Tool Planner, Hypothesis Board, active Stuck Recovery, and true Parallel Agents**. |
 
 | 🏠 Local-First | 🛠️ Shared Tools |
 |---|---|
 | Most challenge data and results stay on your machine. | Human and AI can use the same tools such as `gdb`, `tshark`, `binwalk`, `hashcat`, `pwntools`, and more. |
-## 🚀 Start setup Here
+## 🚀 Start Setup Here
 
 Choose the setup that matches how you want to use Control Room:
 
 | Mode | Best for | Setup |
 |---|---|---|
 | **Beginner / Standard** | New users who want the normal CTF Control Room workflow | `./setup.sh` |
-| **Max Mode** | Users who want Router, Tool Planner, Hypothesis Board, Stuck Recovery, Parallel Plan, and advanced switches | `./setup-max.sh` |
+| **Max Mode** | Users who want Router, Tool Planner, Hypothesis Board, Stuck Recovery, true Parallel Agents, and advanced switches | `./setup-max.sh` |
 | **Manual / Custom** | Users who want to configure individual packages and features themselves | See [`ADVANCED.md`](ADVANCED.md) |
 
 
@@ -125,14 +125,15 @@ Launch Max Mode with the same command:
 
 AI agents are **not installed automatically**.
 
-Control Room currently looks for supported runnable terminal agents such as Gemini, Claude Code, and Codex.
+Control Room currently looks for supported runnable terminal agents such as Claude Code, Gemini CLI, Codex CLI, and optional CAI.
 
 Check them manually:
 
 ```bash
-gemini --version
 claude --version
+gemini --version
 codex --version
+cai --version   # optional; only if you installed CAI separately
 ```
 
 You only need one supported runnable agent.
@@ -170,6 +171,37 @@ cd ~/ctf-control-room
 ./.venv/bin/ctf-go ~/CTF
 ```
 
+
+
+## 📁 Included Challenge Workspace
+
+The repository now includes a ready-to-use `challenges/` tree for development, demos, and local testing:
+
+```text
+challenges/
+├── crypto/
+├── forensics/
+│   └── purple-room-incident/
+├── hardware/
+├── misc/
+├── mobile/
+├── osint/
+├── pwn/
+├── reverse/
+├── stego/
+├── templates/
+└── web/
+```
+
+The included `purple-room-incident` folder is a small authorized forensics demo challenge. Generated Control Room state such as `.ctf/` sessions, cache, snapshots, and `.control-room/` settings are ignored by Git and remain local.
+
+To launch Control Room against this repository workspace instead of the default `~/CTF` workspace:
+
+```bash
+./.venv/bin/ctf-go ~/ctf-control-room/challenges
+```
+
+> `setup.sh` still creates `~/CTF` as the default user workspace and keeps optional reference/tool repositories under `~/CTF/tools/`.
 
 ### Beginner Mode — How It Works
 
@@ -229,7 +261,7 @@ CTF Tools
    ↓
 Evidence / Results
    ↓
-Continue ── or ── Stuck Recovery / Parallel Plan
+Continue ── or ── Stuck Recovery / Parallel Agents
 ```
 
 <p align="center">
@@ -242,7 +274,7 @@ Continue ── or ── Stuck Recovery / Parallel Plan
 
 ## 🖥️ Interface Tour
 
-The application has three main screens. The screenshots below show what a new user will see.
+The application has three primary screens, plus focused modal views for Smart Pre-Scan, the live AI session, and Parallel Agents. The screenshots below show the main experience.
 
 **Image files used by this README:**
 
@@ -286,7 +318,7 @@ Raw results saved locally
 + compact context.md
    ↓
 Optional AI Agent
-Claude Code / Codex / Gemini / compatible client
+Claude Code / Gemini / Codex / optional CAI
    ↓
 Tool Registry
 FAST → DEEP → EXPENSIVE
@@ -299,7 +331,7 @@ AI ↔ Human Takeover
 Handoff • Snapshot • Write-up
 ```
 
-The Smart Pre-Scan gives the AI useful context **before** it starts reasoning. Full tool output stays on disk; only compact useful findings are placed into AI context.
+The Smart Pre-Scan gives the AI useful context **before** it starts reasoning. Full tool output stays on disk; only compact useful findings are placed into AI context. Normal AI sessions are persisted locally, and Max Mode can add recovery or two-branch parallel investigation without removing human takeover.
 
 ---
 
@@ -319,7 +351,7 @@ It can use lightweight tools appropriate to the challenge and stops when:
 
 If the scan finds nothing useful, that is recorded and the AI can choose a deeper approach.
 
-###  Bring your own AI
+### 🤖 Bring your own AI
 
 Use whichever supported terminal agent you already have installed.
 The agent must also be runnable in the same WSL shell; Control Room verifies this with the client's `--version` command before listing it.
@@ -329,7 +361,7 @@ Examples:
 - Claude Code
 - Codex CLI
 - Gemini CLI
-- compatible clients using local Ollama models
+- optional CAI CLI/backend when installed separately
 
 A user with **only Claude Code** can still use Control Room. AI agents are never installed automatically.
 
@@ -340,7 +372,7 @@ Control Room itself stays lightweight. CTF tools are installed only if the user 
 Start the friendly installer:
 
 ```bash
-ctf-tools wizard
+./.venv/bin/ctf-tools wizard
 ```
 
 Available packs include:
@@ -361,13 +393,13 @@ Available packs include:
 Install packs later at any time:
 
 ```bash
-ctf-tools install core forensics network
+./.venv/bin/ctf-tools install core forensics network
 ```
 
 Check what is available:
 
 ```bash
-ctf-tools status
+./.venv/bin/ctf-tools status
 ```
 
 GitHub tools/reference repositories are kept under:
@@ -414,17 +446,17 @@ search_ctf_references(...)
 
 For compatible AI clients, MCP gives the agent a structured interface to Control Room.
 
-Install the optional MCP dependency:
+Install the optional MCP dependency from the repository root:
 
 ```bash
-pip install -e '.[mcp]'
+./.venv/bin/python -m pip install -e '.[mcp]'
 ```
 
 For the current challenge:
 
 ```bash
 export CTF_CONTROL_CHALLENGE="$PWD"
-ctf-mcp
+./.venv/bin/ctf-mcp
 ```
 
 The MCP layer exposes:
@@ -492,30 +524,24 @@ challenge/
     └── snapshots/
 ```
 
-This keeps parallel work separated without adding extra setup.
+Normal AI sessions are persisted under `.ctf/sessions/` with session metadata, prompt, transcript, and the latest visible screen.
 
-Examples:
-
-```text
-Challenge A → Claude session
-Challenge B → Claude session
-```
-
-or:
+Parallel Mode uses separate workspace copies for the **same challenge**, so two branches can investigate independently without sharing scratch files. The branches may use two different agents, or the same agent twice with different methods.
 
 ```text
-Challenge A → Claude
-Challenge B → Codex
+Challenge
+├── Branch A → Reasoning First → Claude
+└── Branch B → Tool First      → Claude / Gemini / Codex / CAI
 ```
 
-The agents can run at the same time because each challenge has its own working state.
+Parallel run metadata and summaries are stored under `.ctf/parallel_runs/`, while isolated branch workspaces live under `.ctf/parallel_workspaces/`.
 
 ### 🩺 Setup Doctor
 
 Before a competition, run:
 
 ```bash
-ctf-doctor
+./.venv/bin/ctf-doctor
 ```
 
 It checks the local environment, reports detected tools/AI clients, and creates a harmless temporary sample challenge to verify:
@@ -578,7 +604,7 @@ Smart Router
 Tool Planner
 Hypothesis Board
 Stuck Recovery
-Parallel Agents / Parallel Plan
+Parallel Agents
 CAI backend switch
 ```
 
@@ -624,7 +650,7 @@ Ranks a short list of installed tools that make sense for the current category a
 
 **Hypothesis Board**
 
-Stores current evidence, attempted ideas, and next steps in the challenge `.ctf/` state. It helps handoffs and reduces repeated investigation.
+Stores active hypotheses, visible evidence, attempted commands, and next steps in the challenge `.ctf/` state. The board updates from **visible terminal output and human commands** only; it does not store hidden chain-of-thought. It also receives Parallel Agents results so handoffs can preserve the latest state.
 
 These features are deterministic/local and are intended to reduce wasted time and context.
 
@@ -635,49 +661,51 @@ These features are deterministic/local and are intended to reduce wasted time an
 Enable:
 
 ```bash
-ctf-power enable stuck_recovery
+./.venv/bin/ctf-power enable stuck_recovery
 ```
 
-Press `Y` when you want a fresh recovery pass. Control Room prepares a compact summary of the failed approach and asks for genuinely different next approaches.
+Press `Y` when the current approach is stuck. Control Room writes a compact recovery prompt from the prepared context and Hypothesis Board, asks for genuinely different next approaches, and sends the recovery instruction to the active AI session when available instead of only creating a passive note.
 
 **Parallel Agents**
 
 Enable:
 
 ```bash
-ctf-power enable parallel_agents
+./.venv/bin/ctf-power enable parallel_agents
 ```
 
-Press `P` to prepare independent investigation branches for a difficult or high-value challenge.
+Press `P` to open the Parallel Agents chooser. Pick the agent and method for **Branch A** and **Branch B**, then start two independent investigations concurrently in isolated workspace copies.
 
-Parallel agents can reduce wall-clock time but may multiply model/token usage, so the feature is off by default.
+The built-in methods are **Reasoning First** and **Tool First**. You can use two different agents or the same runnable agent twice. When both branches finish, Control Room creates a local comparison summary with agreement/disagreement and any candidate flag it can safely extract.
+
+Parallel agents can reduce wall-clock time but may multiply model/token usage, so use them selectively. They are enabled by the Max profile and can also be controlled with the power settings.
 
 **CAI Advanced Backend**
 
-CAI integration is optional. Control Room detects it if the user installs it separately. It is never installed automatically because it is an advanced external agent framework and may generate additional model usage.
+CAI integration is optional. Control Room can expose CAI as an agent only when its CLI is installed separately, runnable, and the CAI backend switch is enabled for the chosen profile. CAI is never installed automatically.
 
 ### 🟣 Max Mode
 
-Complete guide covering Smart Router, Tool Planner, Hypothesis Board, Stuck Recovery, Parallel Plan, CAI, MCP, advanced tooling, and more.
+The Max guide covers Smart Router, Tool Planner, Hypothesis Board, Stuck Recovery, parallel investigation, CAI, MCP, advanced tooling, and more. The current code now runs **true two-branch Parallel Agents**, so older guide wording that says “Parallel Plan” should be read as the earlier version of this feature.
 
 [⬇️ Download Max Mode Complete Guide](docs/guides/CTF_Control_Room_Max_Mode_Complete_Guide.docx?raw=1)
 
 ### Simple power profiles
 
 ```bash
-ctf-power profile standard
+./.venv/bin/ctf-power profile standard
 ```
 
 Router + Tool Planner + Hypothesis Board.
 
 ```bash
-ctf-power profile advanced
+./.venv/bin/ctf-power profile advanced
 ```
 
 Adds Stuck Recovery.
 
 ```bash
-ctf-power profile max
+./.venv/bin/ctf-power profile max
 ```
 
 Enables all advanced switches, including Parallel Agents and CAI mode.
@@ -728,7 +756,7 @@ It explains:
 - Handoff and Snapshot,
 - Hypothesis Board,
 - Stuck Recovery,
-- Parallel Plan,
+- Parallel Agents,
 - Tool Discovery and Tool Planner,
 - toolbox and local reference repositories,
 - MCP,
@@ -750,8 +778,10 @@ Press `ESC` to return, or `W` to go to Welcome.
 | `I` | Interrupt | Send Ctrl-C to the current process |
 | `H` | Handoff | Prepare current progress for another agent |
 | `X` | Snapshot | Save the current challenge state |
-| `Y` | Stuck Recovery | Prepare an optional fresh-reasoning recovery when enabled |
-| `P` | Parallel Plan | Prepare optional parallel investigation branches when enabled |
+| `Y` | Stuck Recovery | Send a different recovery path to the active AI when enabled |
+| `P` | Parallel Agents | Choose and run two independent AI branches when enabled |
+| `V` | AI View | Open or reopen the large live shared AI terminal popup |
+| `W` | Welcome | Return to the Welcome screen |
 | `E` | Write-up | Prepare a local write-up without an AI call |
 | `L` | Save Lesson | Save a reusable CTF technique |
 | `F` | Refresh | Refresh the dashboard/challenge list |
@@ -774,9 +804,14 @@ challenge/
     ├── tool_registry.md
     ├── commands.jsonl
     ├── metrics.json
+    ├── hypotheses.json
+    ├── hypothesis.md
+    ├── recovery_prompt.md        # when Stuck Recovery is used
     ├── raw/
     ├── cache/
     ├── sessions/
+    ├── parallel_runs/            # when Parallel Agents are used
+    ├── parallel_workspaces/      # isolated branch copies
     └── snapshots/
 ```
 
@@ -811,8 +846,14 @@ Highlights:
 - shared human/AI workflow
 - duplicate-work protection and result cache
 - challenge snapshots
+- persistent per-agent session workspaces and transcripts
+- visible-output Hypothesis Board updates
+- active Stuck Recovery
+- true two-branch Parallel Agents with isolated workspaces and local comparison
+- optional CAI adapter support
+- large live AI session popup (`V`) and shared human/AI terminal controls
 - lightweight per-challenge/session isolation
-
+- included challenge workspace with category folders and a Purple Room forensics demo
 - `ctf-doctor` setup self-test
 - local metrics and write-up support
 
@@ -840,16 +881,16 @@ Control Room skips that package and continues installing the rest of the pack.
 
 GitHub tools such as `pwndbg`, `RsaCtfTool`, and `jwt_tool` also get a best-effort local setup step after cloning.
 
-Before setup, you can run:
+After the project has been installed into `.venv`, you can run:
 
 ```bash
-ctf-install-check
+./.venv/bin/ctf-install-check
 ```
 
-After setup:
+For the full environment self-test:
 
 ```bash
-ctf-doctor
+./.venv/bin/ctf-doctor
 ```
 
 For the advanced/max path:
@@ -912,5 +953,6 @@ GitHub repository clones.
 
 ## UI Compatibility
 
-The agent selector now opens correctly even when no AI agent is installed.
-This fixes `EmptySelectError` with newer Textual releases.
+Agent selection now uses explicit buttons for supported runnable agents instead of relying on a blank dropdown state. Control Room validates each CLI with `--version` before listing it, and the dashboard can still run without AI installed.
+
+The live AI session opens in a larger popup view and can be reopened with `V`. Smart Pre-Scan uses its own progress popup, and Parallel Agents uses a dedicated two-branch chooser.
