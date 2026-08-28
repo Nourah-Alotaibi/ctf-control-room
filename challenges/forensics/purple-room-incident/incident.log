@@ -1,0 +1,7 @@
+2026-08-27 18:41:02 INFO workstation=PR-07 status=online
+2026-08-27 18:41:17 WARN removable_media=true device=/dev/sdb1
+2026-08-27 18:41:31 INFO operator_note="backup moved to image carrier"
+2026-08-27 18:42:03 DEBUG token=Q1RGe3RoaXNfaXNfYV9kZWNveV9ub3RfdGhlX3JlYWxfZmxhZ30=
+2026-08-27 18:42:20 INFO room_code=42
+2026-08-27 18:42:44 WARN image_size_changed_after_export=true
+2026-08-27 18:43:02 INFO shutdown=manual
